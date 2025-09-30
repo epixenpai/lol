@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: jiotv-go
+    plan: free
+    autoDeploy: true
+    image: ghcr.io/jiotv-go/jiotv_go:latest
+    envVars:
+      - key: TZ
+        value: Asia/Kolkata
+      - key: JIOTV_DRM
+        value: "true"
+      - key: JIOTV_PATH_PREFIX
+        value: /app/.jiotv_go
+      - key: PORT
+        value: "5001"   # Render provides a PORT env automatically, but you can set default
+    command: ["jiotv_go", "serve", "--public", "--port", "${PORT}"]
+    mounts:
+      - type: volume
+        name: jiotv_go
+        mountPath: /app/.jiotv_go
