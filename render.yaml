@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: jiotv-go
+    env: docker
+    plan: free
+    autoDeploy: true
+    image: ghcr.io/jiotv-go/jiotv_go:latest
+    envVars:
+      - key: TZ
+        value: Asia/Kolkata
+      - key: JIOTV_PATH_PREFIX
+        value: /app/.jiotv_go
+      - key: JIOTV_DRM
+        value: "true"
+    command: ["jiotv_go", "serve", "--public", "--port", "5001"]
